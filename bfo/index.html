@@ -4,255 +4,681 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BFÓ — Bifreiðaverkstæði Friðriks Ólafssonar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0f0f14;--bg2:#1a1a24;--card:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.08);--text:#e8e8e8;--text2:#999;--accent:#c4362c;--accent2:#e04a3f;--gold:#d4a017;--green:#22c55e}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--accent2);text-decoration:none}
-a:hover{text-decoration:underline}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,15,20,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-size:24px;font-weight:800;color:var(--accent);letter-spacing:2px}
-.nav-logo span{color:var(--text);font-weight:400;font-size:13px;display:block;letter-spacing:0}
-.nav-links{display:flex;gap:24px;align-items:center}
-.nav-links a{color:var(--text2);font-size:14px;font-weight:500;transition:.2s}
-.nav-links a:hover{color:var(--text);text-decoration:none}
-.nav-cta{background:var(--accent);color:#fff;padding:8px 20px;border-radius:8px;font-weight:600;font-size:14px;transition:.2s}
-.nav-cta:hover{background:var(--accent2);text-decoration:none}
-@media(max-width:768px){.nav-links{display:none}.nav{padding:12px 16px}}
+:root {
+  --red: #8B2020;
+  --red-hover: #7a1c1c;
+  --red-light: rgba(139,32,32,0.08);
+  --text: #1a1a1a;
+  --text-muted: #666;
+  --bg: #f5f5f5;
+  --white: #ffffff;
+  --border: #e0e0e0;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+}
 
-/* Hero */
-.hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 60px;background:linear-gradient(180deg,rgba(196,54,44,0.15) 0%,transparent 60%);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 50% 0%,rgba(196,54,44,0.1) 0%,transparent 50%)}
-.hero h1{font-size:clamp(36px,6vw,64px);font-weight:800;line-height:1.1;margin-bottom:16px}
-.hero h1 span{color:var(--accent)}
-.hero p{font-size:18px;color:var(--text2);max-width:600px;margin:0 auto 32px}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn{padding:14px 32px;border-radius:10px;font-weight:600;font-size:16px;display:inline-flex;align-items:center;gap:8px;transition:.2s;border:none;cursor:pointer}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:var(--accent2);text-decoration:none}
-.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
-.btn-outline:hover{background:var(--card);text-decoration:none}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(196,54,44,0.15);border:1px solid rgba(196,54,44,0.3);padding:6px 16px;border-radius:20px;font-size:13px;color:var(--accent2);margin-bottom:24px}
-.hero-stats{display:flex;gap:40px;justify-content:center;margin-top:48px;flex-wrap:wrap}
-.hero-stat{text-align:center}
-.hero-stat-num{font-size:32px;font-weight:800;color:var(--gold)}
-.hero-stat-label{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:1px}
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--white);
+  color: var(--text);
+  line-height: 1.6;
+}
 
-/* Section */
-.section{padding:80px 24px}
-.section-title{font-size:32px;font-weight:700;text-align:center;margin-bottom:8px}
-.section-sub{font-size:16px;color:var(--text2);text-align:center;margin-bottom:48px}
+a { color: var(--red); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-/* Services */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1000px;margin:0 auto}
-.service-card{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.3s;cursor:default}
-.service-card:hover{border-color:rgba(196,54,44,0.3);transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,54,44,0.08)}
-.service-icon{font-size:36px;margin-bottom:16px}
-.service-card h3{font-size:18px;font-weight:600;margin-bottom:8px}
-.service-card p{font-size:14px;color:var(--text2);line-height:1.6}
+/* ── Nav ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.nav-logo-main {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--red);
+  letter-spacing: 1px;
+}
+.nav-logo-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.nav-links a {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .2s;
+  text-decoration: none;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--red);
+  color: #fff !important;
+  padding: 9px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background .2s;
+}
+.nav-cta:hover { background: var(--red-hover) !important; text-decoration: none; }
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav { padding: 0 16px; }
+}
 
-/* Contact */
-.contact-section{background:var(--bg2)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1000px;margin:0 auto}
-@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
-.contact-info{display:flex;flex-direction:column;gap:20px}
-.contact-item{display:flex;gap:12px;align-items:flex-start}
-.contact-item-icon{font-size:20px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(196,54,44,0.15);border-radius:10px;flex-shrink:0}
-.contact-item h4{font-size:14px;font-weight:600;margin-bottom:2px}
-.contact-item p{font-size:14px;color:var(--text2)}
+/* ── Hero ── */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px 60px;
+  position: relative;
+  overflow: hidden;
+  background: #2a0a0a;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(100,18,18,0.75) 0%,
+    rgba(80,12,12,0.85) 60%,
+    rgba(20,5,5,0.95) 100%
+  );
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+.hero-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 24px;
+}
+.hero-rating .stars { color: #f5c842; letter-spacing: 1px; }
+.hero h1 {
+  font-size: clamp(36px, 6vw, 62px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.hero p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 36px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 30px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  transition: all .2s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: var(--red-hover); text-decoration: none; }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  margin-top: 56px;
+  flex-wrap: wrap;
+}
+.hero-stat-num {
+  font-size: 30px;
+  font-weight: 800;
+  color: #fff;
+}
+.hero-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 2px;
+}
+
+/* ── Section ── */
+.section { padding: 80px 24px; }
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 700;
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.section-sub {
+  font-size: 16px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+/* ── Services ── */
+.services-section { background: var(--bg); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.service-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .25s, transform .25s;
+  cursor: default;
+}
+.service-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.service-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--red-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.service-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--red);
+  stroke-width: 1.75;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.service-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.service-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── Reviews ── */
+.reviews-section { background: var(--white); }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.review-card {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 24px;
+  border: 1px solid var(--border);
+}
+.review-stars {
+  color: #f5c842;
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.review-text {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 14px;
+}
+.review-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.review-source {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ── Contact ── */
+.contact-section { background: var(--bg); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+.contact-item { display: flex; gap: 14px; align-items: flex-start; }
+.contact-item-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.contact-item-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--red);
+  stroke-width: 1.75;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.contact-item h4 { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 3px; }
+.contact-item p, .contact-item a { font-size: 15px; color: var(--text); line-height: 1.5; }
+.contact-item a:hover { text-decoration: underline; }
 
 /* Form */
-.form{display:flex;flex-direction:column;gap:16px}
-.form-group{display:flex;flex-direction:column;gap:4px}
-.form-group label{font-size:13px;font-weight:500;color:var(--text2)}
-.form-group input,.form-group textarea,.form-group select{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;outline:none;transition:.2s}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
-.form-group textarea{min-height:80px;resize:vertical}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:768px){.form-row{grid-template-columns:1fr}}
-.form-submit{background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;font-size:16px;border:none;cursor:pointer;transition:.2s}
-.form-submit:hover{background:var(--accent2)}
+.contact-form-wrap {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid var(--border);
+}
+.contact-form-wrap h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.contact-form-wrap > p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.form { display: flex; flex-direction: column; gap: 14px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 13px; font-weight: 500; color: var(--text); }
+.form-group input,
+.form-group textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 10px 13px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s;
+  -webkit-appearance: none;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--red); background: var(--white); }
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: #bbb; }
+.form-group textarea { min-height: 90px; resize: vertical; }
+.form-submit {
+  background: var(--red);
+  color: #fff;
+  padding: 13px 24px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+  font-family: inherit;
+  text-align: center;
+}
+.form-submit:hover { background: var(--red-hover); }
 
-/* Map */
-.map-container{max-width:1000px;margin:0 auto;border-radius:16px;overflow:hidden;height:300px;border:1px solid var(--border)}
-.map-container iframe{width:100%;height:100%;border:0}
+/* ── Map ── */
+.map-section { padding: 0; }
+.map-container { height: 380px; overflow: hidden; }
+.map-container iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-/* Reviews */
-.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1000px;margin:0 auto}
-.review-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
-.review-stars{color:var(--gold);font-size:16px;margin-bottom:8px}
-.review-text{font-size:14px;color:var(--text2);font-style:italic;margin-bottom:12px}
-.review-author{font-size:13px;font-weight:600}
-
-/* Footer */
-.footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 24px;text-align:center}
-.footer p{color:var(--text2);font-size:13px}
-.footer-badge{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--text2);opacity:.5}
-
-/* Urru badge */
-.urru-badge{position:fixed;bottom:16px;right:16px;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:11px;color:var(--text2);z-index:100}
-.urru-badge a{color:#00D4FF}
+/* ── Footer ── */
+.footer {
+  background: #111;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-top {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.footer-info {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+.footer-credit {
+  font-size: 12px;
+  color: #555;
+}
+.footer-credit a { color: #777; }
+.footer-credit a:hover { color: #999; }
 </style>
 </head>
 <body>
 
+<!-- Nav -->
 <nav class="nav">
-  <div class="nav-logo">BFÓ<span>Bifreiðaverkstæði</span></div>
+  <div class="nav-logo">
+    <span class="nav-logo-main">BFÓ</span>
+    <span class="nav-logo-sub">Bifreiðaverkstæði Friðriks Ólafssonar</span>
+  </div>
   <div class="nav-links">
     <a href="#thjonusta">Þjónusta</a>
-    <a href="#samband">Hafðu samband</a>
-    <a href="#stadsetning">Staðsetning</a>
-    <a href="#samband" class="nav-cta">📞 Bóka tíma</a>
+    <a href="#umsagnir">Umsagnir</a>
+    <a href="#samband">Samband</a>
+    <a href="tel:5677360" class="nav-cta">Hringdu í okkur</a>
   </div>
 </nav>
 
+<!-- Hero -->
 <section class="hero">
-  <div>
-    <div class="hero-badge">⭐ 4.8/5 — 31 Google umsagnir</div>
-    <h1>Þitt <span>verkstæði</span> í Kópavogi</h1>
-    <p>Faglegar viðgerðir, þjónusta og ábyrgðarskoðanir á öllum tegundum bifreiða. Opið síðan 1985.</p>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-rating">
+      <span class="stars">★★★★★</span>
+      <span>4.8/5 — 31 Google umsagnir</span>
+    </div>
+    <h1>Bifreiðaverkstæði í Kópavogi</h1>
+    <p>Faglegar viðgerðir, þjónusta og ábyrgðarskoðanir á öllum tegundum bifreiða. Yfir 39 ára reynsla.</p>
     <div class="hero-btns">
-      <a href="#samband" class="btn btn-primary">📝 Senda fyrirspurn</a>
-      <a href="tel:5677360" class="btn btn-outline">📞 567 7360</a>
+      <a href="#samband" class="btn btn-primary">Hafa samband</a>
+      <a href="tel:5677360" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.62 5C1.62 3.99 2.37 3.11 3.34 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.39 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18l.42 1.42-.08-2.5z"/></svg>
+        567 7360
+      </a>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">39+</div><div class="hero-stat-label">Ára reynsla</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">4.8</div><div class="hero-stat-label">Google einkunn</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">31</div><div class="hero-stat-label">Umsagnir</div></div>
+      <div>
+        <div class="hero-stat-num">39+</div>
+        <div class="hero-stat-label">Ára reynsla</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4.8</div>
+        <div class="hero-stat-label">Google einkunn</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">31</div>
+        <div class="hero-stat-label">Umsagnir</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="thjonusta">
-  <h2 class="section-title">Okkar þjónusta</h2>
-  <p class="section-sub">Alhliða bílaþjónusta fyrir allar tegundir</p>
+<!-- Services -->
+<section class="section services-section" id="thjonusta">
+  <p class="section-label">Þjónusta</p>
+  <h2 class="section-title">Hvað getum við gert fyrir þig?</h2>
+  <p class="section-sub">Alhliða bílaþjónusta — frá smáum viðgerðum að stórum verkefnum</p>
   <div class="services-grid">
+
     <div class="service-card">
-      <div class="service-icon">🔧</div>
+      <div class="service-icon">
+        <!-- Wrench -->
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
       <h3>Almenn viðgerð</h3>
       <p>Viðgerðir á vélum, gírskiptum, hemla- og stýrisbúnaði. Fagleg greining og áreiðanleg vinna.</p>
     </div>
+
     <div class="service-card">
-      <div class="service-icon">🛞</div>
+      <div class="service-icon">
+        <!-- Circle/Wheel -->
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg>
+      </div>
       <h3>Hjólastillingar</h3>
       <p>Nákvæmar hjólastillingar fyrir allar bílategundir. Dekkjaskipti og jafnvægisstilling.</p>
     </div>
+
     <div class="service-card">
-      <div class="service-icon">📋</div>
+      <div class="service-icon">
+        <!-- Clipboard -->
+        <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+      </div>
       <h3>Ábyrgðarskoðun</h3>
       <p>Áreiðanlegar ábyrgðarskoðanir samkvæmt stöðlum. Fljótlegt og faglegt.</p>
     </div>
+
     <div class="service-card">
-      <div class="service-icon">⚙️</div>
+      <div class="service-icon">
+        <!-- Gear/Settings -->
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </div>
       <h3>Þjónusta og viðhald</h3>
       <p>Reglulegt viðhald til að tryggja langa endingu bílsins. Olíuskipti, síur, vökvar.</p>
     </div>
+
     <div class="service-card">
-      <div class="service-icon">🔍</div>
+      <div class="service-icon">
+        <!-- Search -->
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
       <h3>Bilanagreining</h3>
       <p>Tölvugreining á öllum kerfum bílsins. Finnum vandamálið fljótt og vel.</p>
     </div>
+
     <div class="service-card">
-      <div class="service-icon">❄️</div>
+      <div class="service-icon">
+        <!-- Snowflake -->
+        <svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 7l-5 5-5-5"/><path d="M17 17l-5-5-5 5"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M7 7l5 5 5-5"/><path d="M7 17l5-5 5 5"/></svg>
+      </div>
       <h3>Loftkælikerfi</h3>
       <p>Viðgerð og áfylling á loftkælikerfum. Hleðsla og lekkaleit.</p>
     </div>
+
   </div>
 </section>
 
-<section class="section" id="umsagnir">
+<!-- Reviews -->
+<section class="section reviews-section" id="umsagnir">
+  <p class="section-label">Umsagnir</p>
   <h2 class="section-title">Hvað segja viðskiptavinir</h2>
   <p class="section-sub">Raunverulegar umsagnir frá Google</p>
   <div class="reviews-grid">
     <div class="review-card">
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <div class="review-text">"Fair price. The staff didn't try to overcharge or anything and were frank and honest about what can be fixed, what needs to be fixed, and what would not be cost effective."</div>
-      <div class="review-author">— Rohit Goswami</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Fair price. The staff didn't try to overcharge or anything and were frank and honest about what can be fixed, what needs to be fixed, and what would not be cost effective."</p>
+      <div class="review-author">Rohit Goswami <span class="review-source">· Google</span></div>
     </div>
     <div class="review-card">
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <div class="review-text">"The check engine light on my 2004 Honda unexpectedly lit up. BFÓ were very professional and solved the problem quickly."</div>
-      <div class="review-author">— Karl Emil Karlsson</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The check engine light on my 2004 Honda unexpectedly lit up. BFÓ were very professional and solved the problem quickly."</p>
+      <div class="review-author">Karl Emil Karlsson <span class="review-source">· Google</span></div>
     </div>
     <div class="review-card">
-      <div class="review-stars">⭐⭐⭐⭐⭐</div>
-      <div class="review-text">"Alltaf fáið góða þjónustu hjá BFÓ. Heiðarlegir og faglegir. Mæli með."</div>
-      <div class="review-author">— Viðskiptavinur</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Alltaf fáið góða þjónustu hjá BFÓ. Heiðarlegir og faglegir. Mæli eindregið með."</p>
+      <div class="review-author">Viðskiptavinur <span class="review-source">· Google</span></div>
     </div>
   </div>
 </section>
 
+<!-- Contact -->
 <section class="section contact-section" id="samband">
-  <h2 class="section-title">Hafðu samband</h2>
-  <p class="section-sub">Við erum tilbúin að aðstoða þig með öll bílaþjónustu þörf</p>
+  <p class="section-label">Hafðu samband</p>
+  <h2 class="section-title">Við erum til þjónustu</h2>
+  <p class="section-sub">Sendu okkur línu eða hringdu beint</p>
   <div class="contact-grid">
     <div class="contact-info">
+
       <div class="contact-item">
-        <div class="contact-item-icon">📍</div>
-        <div><h4>Heimilisfang</h4><p>Smiðjuvegur 22, græn gata<br>200 Kópavogur</p></div>
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <h4>Heimilisfang</h4>
+          <p>Smiðjuvegur 22, græn gata<br>200 Kópavogur</p>
+        </div>
       </div>
+
       <div class="contact-item">
-        <div class="contact-item-icon">📞</div>
-        <div><h4>Símanúmer</h4><p><a href="tel:5677360">567 7360</a></p></div>
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.62 5C1.62 3.99 2.37 3.11 3.34 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.39 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18l.42 1.42-.08-2.5z"/></svg>
+        </div>
+        <div>
+          <h4>Símanúmer</h4>
+          <p><a href="tel:5677360">567 7360</a></p>
+        </div>
       </div>
+
       <div class="contact-item">
-        <div class="contact-item-icon">📧</div>
-        <div><h4>Netfang</h4><p><a href="mailto:bfo@bfo.is">bfo@bfo.is</a></p></div>
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <h4>Netfang</h4>
+          <p><a href="mailto:bfo@bfo.is">bfo@bfo.is</a></p>
+        </div>
       </div>
+
       <div class="contact-item">
-        <div class="contact-item-icon">🕐</div>
-        <div><h4>Opnunartímar</h4><p>Mán–Fim: 08:00–17:00<br>Föstudaga: 08:00–13:00</p></div>
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        </div>
+        <div>
+          <h4>Opnunartímar</h4>
+          <p>Mánudaga–fimmtudaga: 08:00–17:00<br>Föstudaga: 08:00–13:00</p>
+        </div>
       </div>
+
     </div>
-    <form class="form" onsubmit="event.preventDefault();alert('Takk! Við munum hafa samband fljótlega.')">
-      <h3 style="font-size:18px;margin-bottom:4px">Sendu okkur skilaboð</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Nafn *</label>
-          <input type="text" placeholder="Fullt nafn" required>
+
+    <div class="contact-form-wrap">
+      <h3>Sendu okkur skilaboð</h3>
+      <p>Við svörum innan sólarhrings</p>
+      <form class="form" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:#8B2020;font-weight:600;padding:12px 0\'>Takk! Við munum hafa samband fljótlega.</p>'">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nafn *</label>
+            <input type="text" placeholder="Fullt nafn" required>
+          </div>
+          <div class="form-group">
+            <label>Símanúmer *</label>
+            <input type="tel" placeholder="xxx xxxx" required>
+          </div>
         </div>
         <div class="form-group">
-          <label>Símanúmer *</label>
-          <input type="tel" placeholder="xxx xxxx" required>
+          <label>Netfang</label>
+          <input type="email" placeholder="netfang@example.is">
         </div>
-      </div>
-      <div class="form-group">
-        <label>Netfang</label>
-        <input type="email" placeholder="netfang@example.is">
-      </div>
-      <div class="form-group">
-        <label>Bílnúmer *</label>
-        <input type="text" placeholder="ABC12" required>
-      </div>
-      <div class="form-group">
-        <label>Tegund bíls</label>
-        <input type="text" placeholder="t.d. Toyota Yaris 2019">
-      </div>
-      <div class="form-group">
-        <label>Skilaboð *</label>
-        <textarea placeholder="Bíltegund og hvernig getum við aðstoðað þig?" required></textarea>
-      </div>
-      <button type="submit" class="form-submit">Senda fyrirspurn →</button>
-    </form>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Bílnúmer *</label>
+            <input type="text" placeholder="ABC12" required>
+          </div>
+          <div class="form-group">
+            <label>Bílategund</label>
+            <input type="text" placeholder="t.d. Toyota Yaris 2019">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Skilaboð *</label>
+          <textarea placeholder="Hvernig getum við aðstoðað þig?" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Senda fyrirspurn →</button>
+      </form>
+    </div>
   </div>
 </section>
 
-<section class="section" id="stadsetning">
-  <h2 class="section-title">Staðsetning</h2>
-  <p class="section-sub">Smiðjuvegur 22, 200 Kópavogur</p>
+<!-- Map -->
+<div class="map-section" id="stadsetning">
   <div class="map-container">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1743.5!2d-21.88!3d64.11!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48d674c8f0c5f3e1%3A0x8f0c5f3e1!2sSmi%C3%B0juvegur+22%2C+200+K%C3%B3pavogur!5e0!3m2!1sis!2sis!4v1" allowfullscreen loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1743.5!2d-21.88!3d64.11!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48d674c8f0c5f3e1%3A0x8f0c5f3e1!2sSmi%C3%B0juvegur+22%2C+200+K%C3%B3pavogur!5e0!3m2!1sis!2sis!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
-</section>
+</div>
 
+<!-- Footer -->
 <footer class="footer">
-  <p>© 2026 Bifreiðaverkstæði Friðriks Ólafssonar ehf — Öll réttindi áskilin</p>
-  <div class="footer-badge">Hannað af <a href="https://urru.ai" target="_blank">Urru.ai</a></div>
+  <div class="footer-top">BFÓ — Bifreiðaverkstæði Friðriks Ólafssonar ehf</div>
+  <div class="footer-info">
+    Smiðjuvegur 22, græn gata, 200 Kópavogur &nbsp;·&nbsp; <a href="tel:5677360" style="color:#888">567 7360</a> &nbsp;·&nbsp; <a href="mailto:bfo@bfo.is" style="color:#888">bfo@bfo.is</a><br>
+    © 2026 — Öll réttindi áskilin
+  </div>
+  <div class="footer-credit">Vefur hannaður af <a href="https://urru.ai" target="_blank">Urru.ai</a></div>
 </footer>
-
-<div class="urru-badge">Demo by <a href="https://urru.ai" target="_blank">urru.ai</a></div>
 
 </body>
 </html>
