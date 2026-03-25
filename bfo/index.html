@@ -11,16 +11,18 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --red: #8B2020;
-  --red-hover: #7a1c1c;
-  --red-light: rgba(139,32,32,0.08);
-  --text: #1a1a1a;
-  --text-muted: #666;
-  --bg: #f5f5f5;
+  --blue: #2563eb;
+  --blue-dark: #1e3a5f;
+  --blue-hover: #1d4ed8;
+  --blue-light: rgba(37, 99, 235, 0.08);
+  --blue-mid: #60a5fa;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --bg: #f8fafc;
   --white: #ffffff;
-  --border: #e0e0e0;
-  --shadow: 0 2px 12px rgba(0,0,0,0.08);
-  --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+  --border: #e2e8f0;
+  --shadow: 0 1px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 20px rgba(37,99,235,0.12);
 }
 
 body {
@@ -30,7 +32,7 @@ body {
   line-height: 1.6;
 }
 
-a { color: var(--red); text-decoration: none; }
+a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* ── Nav ── */
@@ -38,30 +40,38 @@ a:hover { text-decoration: underline; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.97);
+  background: rgba(255,255,255,0.96);
   border-bottom: 1px solid var(--border);
-  padding: 0 32px;
+  padding: 0 40px;
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  backdrop-filter: blur(8px);
 }
 .nav-logo {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
+  align-items: center;
+  gap: 11px;
 }
-.nav-logo-main {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--red);
-  letter-spacing: 1px;
+.nav-logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--blue);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
-.nav-logo-sub {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 400;
+.nav-logo-mark svg {
+  width: 18px; height: 18px;
+  stroke: #fff; stroke-width: 2; fill: none;
+  stroke-linecap: round; stroke-linejoin: round;
 }
+.nav-logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+.nav-logo-main { font-size: 18px; font-weight: 800; color: var(--blue-dark); letter-spacing: 0.5px; }
+.nav-logo-sub { font-size: 11px; color: var(--text-muted); font-weight: 400; }
 .nav-links {
   display: flex;
   gap: 28px;
@@ -76,94 +86,80 @@ a:hover { text-decoration: underline; }
 }
 .nav-links a:hover { color: var(--text); }
 .nav-cta {
-  background: var(--red);
+  background: var(--blue);
   color: #fff !important;
   padding: 9px 22px;
-  border-radius: 6px;
+  border-radius: 7px;
   font-weight: 600;
   font-size: 14px;
   transition: background .2s;
+  text-decoration: none;
 }
-.nav-cta:hover { background: var(--red-hover) !important; text-decoration: none; }
+.nav-cta:hover { background: var(--blue-hover) !important; text-decoration: none; }
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .nav { padding: 0 16px; }
 }
 
-/* ── Hero ── */
+/* ── Hero: Split Layout ── */
 .hero {
-  min-height: 90vh;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  padding-top: 64px;
+}
+.hero-left {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 100px 24px 60px;
-  position: relative;
-  overflow: hidden;
-  background: #2a0a0a;
+  padding: 56px 56px 56px 56px;
+  background: var(--white);
 }
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1920&q=80');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.35;
-}
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(100,18,18,0.75) 0%,
-    rgba(80,12,12,0.85) 60%,
-    rgba(20,5,5,0.95) 100%
-  );
-}
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-}
-.hero-rating {
+.hero-left-inner { max-width: 500px; }
+
+.hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.2);
+  gap: 8px;
+  background: var(--blue-light);
+  border: 1px solid rgba(37,99,235,0.2);
   padding: 5px 14px;
   border-radius: 20px;
   font-size: 13px;
-  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+  color: var(--blue);
   margin-bottom: 24px;
 }
-.hero-rating .stars { color: #f5c842; letter-spacing: 1px; }
+.hero-eyebrow .stars { color: #f59e0b; letter-spacing: 1px; }
+
 .hero h1 {
-  font-size: clamp(36px, 6vw, 62px);
+  font-size: clamp(34px, 4vw, 54px);
   font-weight: 800;
-  color: #fff;
+  color: var(--blue-dark);
   line-height: 1.1;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
-.hero p {
-  font-size: 18px;
-  color: rgba(255,255,255,0.75);
+.hero h1 em { font-style: normal; color: var(--blue); }
+
+.hero-desc {
+  font-size: 17px;
+  color: var(--text-muted);
   margin-bottom: 36px;
-  max-width: 540px;
-  margin-left: auto;
-  margin-right: auto;
+  line-height: 1.65;
+  max-width: 440px;
 }
+
 .hero-btns {
   display: flex;
-  gap: 14px;
-  justify-content: center;
+  gap: 12px;
   flex-wrap: wrap;
+  margin-bottom: 48px;
 }
+
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 30px;
+  padding: 13px 28px;
   border-radius: 7px;
   font-weight: 600;
   font-size: 15px;
@@ -171,44 +167,98 @@ a:hover { text-decoration: underline; }
   border: none;
   transition: all .2s;
   text-decoration: none;
+  font-family: inherit;
 }
-.btn-primary { background: var(--red); color: #fff; }
-.btn-primary:hover { background: var(--red-hover); text-decoration: none; }
-.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
-.btn-outline:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+.btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: var(--blue-hover); text-decoration: none; }
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); text-decoration: none; }
+
 .hero-stats {
   display: flex;
-  gap: 48px;
-  justify-content: center;
-  margin-top: 56px;
+  gap: 32px;
   flex-wrap: wrap;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
 }
 .hero-stat-num {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 800;
-  color: #fff;
+  color: var(--blue-dark);
 }
 .hero-stat-label {
   font-size: 12px;
-  color: rgba(255,255,255,0.55);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin-top: 2px;
 }
 
-/* ── Section ── */
+/* Hero Right: Photo panel with diagonal clip */
+.hero-right {
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+}
+.hero-right-photo {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1200&q=80');
+  background-size: cover;
+  background-position: center;
+}
+.hero-right-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    150deg,
+    rgba(30,58,95,0.78) 0%,
+    rgba(37,99,235,0.5) 100%
+  );
+}
+.hero-right-badge {
+  position: absolute;
+  bottom: 40px;
+  right: 36px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 12px;
+  padding: 18px 22px;
+  color: #fff;
+  z-index: 2;
+  text-align: center;
+}
+.badge-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: .65; margin-bottom: 4px; }
+.badge-value { font-size: 32px; font-weight: 800; line-height: 1; }
+.badge-sub { font-size: 12px; opacity: .65; margin-top: 4px; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { height: 260px; clip-path: none; order: -1; }
+  .hero-left { padding: 36px 24px 48px; }
+  .hero-left-inner { max-width: 100%; }
+  .hero-right-badge { display: none; }
+}
+
+/* ── Section shared ── */
 .section { padding: 80px 24px; }
 .section-label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--red);
+  color: var(--blue);
   text-transform: uppercase;
   letter-spacing: 1.2px;
   text-align: center;
   margin-bottom: 8px;
 }
 .section-title {
-  font-size: clamp(24px, 4vw, 34px);
+  font-size: clamp(24px, 3.5vw, 32px);
   font-weight: 700;
   text-align: center;
   color: var(--text);
@@ -221,155 +271,91 @@ a:hover { text-decoration: underline; }
   margin-bottom: 52px;
 }
 
-/* ── Services ── */
+/* ── Services: Horizontal cards ── */
 .services-section { background: var(--bg); }
-.services-grid {
+.services-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  max-width: 1040px;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  max-width: 960px;
   margin: 0 auto;
 }
-.service-card {
+@media (max-width: 640px) { .services-list { grid-template-columns: 1fr; } }
+
+.service-item {
   background: var(--white);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 28px 24px;
-  box-shadow: var(--shadow);
-  transition: box-shadow .25s, transform .25s;
+  padding: 20px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: box-shadow .2s, border-color .2s;
   cursor: default;
 }
-.service-card:hover {
+.service-item:hover {
+  border-color: rgba(37,99,235,0.3);
   box-shadow: var(--shadow-hover);
-  transform: translateY(-2px);
 }
-.service-icon {
-  width: 44px;
-  height: 44px;
-  background: var(--red-light);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-.service-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--red);
-  stroke-width: 1.75;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.service-card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-.service-card p {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.65;
-}
-
-/* ── Reviews ── */
-.reviews-section { background: var(--white); }
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  max-width: 1040px;
-  margin: 0 auto;
-}
-.review-card {
-  background: var(--bg);
-  border-radius: 10px;
-  padding: 24px;
-  border: 1px solid var(--border);
-}
-.review-stars {
-  color: #f5c842;
-  font-size: 15px;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-}
-.review-text {
-  font-size: 14px;
-  color: #444;
-  line-height: 1.7;
-  font-style: italic;
-  margin-bottom: 14px;
-}
-.review-author {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-}
-.review-source {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-weight: 400;
-}
-
-/* ── Contact ── */
-.contact-section { background: var(--bg); }
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 48px;
-  max-width: 1000px;
-  margin: 0 auto;
-  align-items: start;
-}
-@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
-.contact-info { display: flex; flex-direction: column; gap: 24px; }
-.contact-item { display: flex; gap: 14px; align-items: flex-start; }
-.contact-item-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+.service-item-icon {
+  width: 42px;
+  height: 42px;
+  background: var(--blue-light);
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-.contact-item-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--red);
-  stroke-width: 1.75;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.service-item-icon svg {
+  width: 20px; height: 20px;
+  stroke: var(--blue); stroke-width: 1.75; fill: none;
+  stroke-linecap: round; stroke-linejoin: round;
 }
-.contact-item h4 { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 3px; }
-.contact-item p, .contact-item a { font-size: 15px; color: var(--text); line-height: 1.5; }
-.contact-item a:hover { text-decoration: underline; }
+.service-item-body h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.service-item-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-/* Form */
-.contact-form-wrap {
-  background: var(--white);
-  border-radius: 12px;
-  padding: 32px;
+/* ── Reviews ── */
+.reviews-section { background: var(--white); }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.review-card {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 26px 24px;
   border: 1px solid var(--border);
 }
-.contact-form-wrap h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  color: var(--text);
+.review-stars { color: #f59e0b; font-size: 14px; letter-spacing: 1px; margin-bottom: 12px; }
+.review-text { font-size: 14px; color: #444; line-height: 1.7; font-style: italic; margin-bottom: 16px; }
+.review-author { font-size: 13px; font-weight: 600; color: var(--text); }
+.review-source { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+
+/* ── Contact: dark blue bg, form centered, info cards below ── */
+.contact-section { background: var(--blue-dark); }
+.contact-section .section-label { color: var(--blue-mid); }
+.contact-section .section-title { color: #fff; }
+.contact-section .section-sub { color: rgba(255,255,255,0.55); }
+
+.contact-form-wrap {
+  max-width: 680px;
+  margin: 0 auto 44px;
+  background: var(--white);
+  border-radius: 14px;
+  padding: 36px 40px;
 }
-.contact-form-wrap > p {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 24px;
-}
+@media (max-width: 600px) { .contact-form-wrap { padding: 24px 18px; } }
+
+.contact-form-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.contact-form-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+
 .form { display: flex; flex-direction: column; gap: 14px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+@media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
 .form-group { display: flex; flex-direction: column; gap: 5px; }
 .form-group label { font-size: 13px; font-weight: 500; color: var(--text); }
 .form-group input,
@@ -386,12 +372,12 @@ a:hover { text-decoration: underline; }
   -webkit-appearance: none;
 }
 .form-group input:focus,
-.form-group textarea:focus { border-color: var(--red); background: var(--white); }
+.form-group textarea:focus { border-color: var(--blue); background: var(--white); }
 .form-group input::placeholder,
 .form-group textarea::placeholder { color: #bbb; }
 .form-group textarea { min-height: 90px; resize: vertical; }
 .form-submit {
-  background: var(--red);
+  background: var(--blue);
   color: #fff;
   padding: 13px 24px;
   border-radius: 7px;
@@ -401,39 +387,75 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
   transition: background .2s;
   font-family: inherit;
+}
+.form-submit:hover { background: var(--blue-hover); }
+
+/* Contact info cards row */
+.contact-info-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) { .contact-info-cards { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .contact-info-cards { grid-template-columns: 1fr; } }
+
+.contact-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 22px 18px;
   text-align: center;
 }
-.form-submit:hover { background: var(--red-hover); }
+.contact-card-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(96,165,250,0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.contact-card-icon svg {
+  width: 18px; height: 18px;
+  stroke: var(--blue-mid); stroke-width: 1.75; fill: none;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.contact-card h4 {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 7px;
+}
+.contact-card p, .contact-card a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.55;
+  text-decoration: none;
+}
+.contact-card a:hover { color: #fff; text-decoration: underline; }
 
 /* ── Map ── */
-.map-section { padding: 0; }
-.map-container { height: 380px; overflow: hidden; }
+.map-container { height: 360px; overflow: hidden; }
 .map-container iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* ── Footer ── */
 .footer {
-  background: #111;
-  padding: 32px 24px;
+  background: #0d1b2e;
+  padding: 28px 24px;
   text-align: center;
 }
-.footer-top {
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 8px;
-}
-.footer-info {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 16px;
-  line-height: 1.8;
-}
-.footer-credit {
-  font-size: 12px;
-  color: #555;
-}
-.footer-credit a { color: #777; }
-.footer-credit a:hover { color: #999; }
+.footer-top { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.8); margin-bottom: 6px; }
+.footer-info { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 14px; line-height: 1.8; }
+.footer-info a { color: rgba(255,255,255,0.35); }
+.footer-info a:hover { color: rgba(255,255,255,0.65); }
+.footer-credit { font-size: 12px; color: rgba(255,255,255,0.22); }
+.footer-credit a { color: rgba(255,255,255,0.28); }
+.footer-credit a:hover { color: rgba(255,255,255,0.55); }
 </style>
 </head>
 <body>
@@ -441,8 +463,13 @@ a:hover { text-decoration: underline; }
 <!-- Nav -->
 <nav class="nav">
   <div class="nav-logo">
-    <span class="nav-logo-main">BFÓ</span>
-    <span class="nav-logo-sub">Bifreiðaverkstæði Friðriks Ólafssonar</span>
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+    </div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-main">BFÓ</span>
+      <span class="nav-logo-sub">Bifreiðaverkstæði Friðriks Ólafssonar</span>
+    </div>
   </div>
   <div class="nav-links">
     <a href="#thjonusta">Þjónusta</a>
@@ -452,100 +479,115 @@ a:hover { text-decoration: underline; }
   </div>
 </nav>
 
-<!-- Hero -->
+<!-- Hero: Split Layout -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-rating">
-      <span class="stars">★★★★★</span>
-      <span>4.8/5 — 31 Google umsagnir</span>
+  <div class="hero-left">
+    <div class="hero-left-inner">
+      <div class="hero-eyebrow">
+        <span class="stars">★★★★★</span>
+        <span>4.8/5 — 31 Google umsagnir</span>
+      </div>
+      <h1>Traustasta<br><em>verkstæðið</em><br>í Kópavogi</h1>
+      <p class="hero-desc">Faglegar viðgerðir, þjónusta og ábyrgðarskoðanir á öllum tegundum bifreiða. Yfir 39 ára reynsla.</p>
+      <div class="hero-btns">
+        <a href="#samband" class="btn btn-primary">Hafa samband</a>
+        <a href="tel:5677360" class="btn btn-outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.62 5C1.62 3.99 2.37 3.11 3.34 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.39 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18l.42 1.42-.08-2.5z"/></svg>
+          567 7360
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">39+</div>
+          <div class="hero-stat-label">Ára reynsla</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">4.8</div>
+          <div class="hero-stat-label">Google einkunn</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">31</div>
+          <div class="hero-stat-label">Umsagnir</div>
+        </div>
+      </div>
     </div>
-    <h1>Bifreiðaverkstæði í Kópavogi</h1>
-    <p>Faglegar viðgerðir, þjónusta og ábyrgðarskoðanir á öllum tegundum bifreiða. Yfir 39 ára reynsla.</p>
-    <div class="hero-btns">
-      <a href="#samband" class="btn btn-primary">Hafa samband</a>
-      <a href="tel:5677360" class="btn btn-outline">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.62 5C1.62 3.99 2.37 3.11 3.34 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.39 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18l.42 1.42-.08-2.5z"/></svg>
-        567 7360
-      </a>
-    </div>
-    <div class="hero-stats">
-      <div>
-        <div class="hero-stat-num">39+</div>
-        <div class="hero-stat-label">Ára reynsla</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">4.8</div>
-        <div class="hero-stat-label">Google einkunn</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">31</div>
-        <div class="hero-stat-label">Umsagnir</div>
-      </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-photo"></div>
+    <div class="hero-right-overlay"></div>
+    <div class="hero-right-badge">
+      <div class="badge-label">Opið síðan</div>
+      <div class="badge-value">1985</div>
+      <div class="badge-sub">Smiðjuvegur 22</div>
     </div>
   </div>
 </section>
 
-<!-- Services -->
+<!-- Services: Horizontal cards in 2-column grid -->
 <section class="section services-section" id="thjonusta">
   <p class="section-label">Þjónusta</p>
   <h2 class="section-title">Hvað getum við gert fyrir þig?</h2>
   <p class="section-sub">Alhliða bílaþjónusta — frá smáum viðgerðum að stórum verkefnum</p>
-  <div class="services-grid">
+  <div class="services-list">
 
-    <div class="service-card">
-      <div class="service-icon">
-        <!-- Wrench -->
+    <div class="service-item">
+      <div class="service-item-icon">
         <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
       </div>
-      <h3>Almenn viðgerð</h3>
-      <p>Viðgerðir á vélum, gírskiptum, hemla- og stýrisbúnaði. Fagleg greining og áreiðanleg vinna.</p>
+      <div class="service-item-body">
+        <h3>Almenn viðgerð</h3>
+        <p>Viðgerðir á vélum, gírskiptum, hemla- og stýrisbúnaði. Fagleg greining og áreiðanleg vinna.</p>
+      </div>
     </div>
 
-    <div class="service-card">
-      <div class="service-icon">
-        <!-- Circle/Wheel -->
+    <div class="service-item">
+      <div class="service-item-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg>
       </div>
-      <h3>Hjólastillingar</h3>
-      <p>Nákvæmar hjólastillingar fyrir allar bílategundir. Dekkjaskipti og jafnvægisstilling.</p>
+      <div class="service-item-body">
+        <h3>Hjólastillingar</h3>
+        <p>Nákvæmar hjólastillingar fyrir allar bílategundir. Dekkjaskipti og jafnvægisstilling.</p>
+      </div>
     </div>
 
-    <div class="service-card">
-      <div class="service-icon">
-        <!-- Clipboard -->
+    <div class="service-item">
+      <div class="service-item-icon">
         <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
       </div>
-      <h3>Ábyrgðarskoðun</h3>
-      <p>Áreiðanlegar ábyrgðarskoðanir samkvæmt stöðlum. Fljótlegt og faglegt.</p>
+      <div class="service-item-body">
+        <h3>Ábyrgðarskoðun</h3>
+        <p>Áreiðanlegar ábyrgðarskoðanir samkvæmt stöðlum. Fljótlegt og faglegt.</p>
+      </div>
     </div>
 
-    <div class="service-card">
-      <div class="service-icon">
-        <!-- Gear/Settings -->
+    <div class="service-item">
+      <div class="service-item-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </div>
-      <h3>Þjónusta og viðhald</h3>
-      <p>Reglulegt viðhald til að tryggja langa endingu bílsins. Olíuskipti, síur, vökvar.</p>
+      <div class="service-item-body">
+        <h3>Þjónusta og viðhald</h3>
+        <p>Reglulegt viðhald til að tryggja langa endingu bílsins. Olíuskipti, síur, vökvar.</p>
+      </div>
     </div>
 
-    <div class="service-card">
-      <div class="service-icon">
-        <!-- Search -->
+    <div class="service-item">
+      <div class="service-item-icon">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
-      <h3>Bilanagreining</h3>
-      <p>Tölvugreining á öllum kerfum bílsins. Finnum vandamálið fljótt og vel.</p>
+      <div class="service-item-body">
+        <h3>Bilanagreining</h3>
+        <p>Tölvugreining á öllum kerfum bílsins. Finnum vandamálið fljótt og vel.</p>
+      </div>
     </div>
 
-    <div class="service-card">
-      <div class="service-icon">
-        <!-- Snowflake -->
+    <div class="service-item">
+      <div class="service-item-icon">
         <svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 7l-5 5-5-5"/><path d="M17 17l-5-5-5 5"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M7 7l5 5 5-5"/><path d="M7 17l5-5 5 5"/></svg>
       </div>
-      <h3>Loftkælikerfi</h3>
-      <p>Viðgerð og áfylling á loftkælikerfum. Hleðsla og lekkaleit.</p>
+      <div class="service-item-body">
+        <h3>Loftkælikerfi</h3>
+        <p>Viðgerð og áfylling á loftkælikerfum. Hleðsla og lekkaleit.</p>
+      </div>
     </div>
 
   </div>
@@ -575,96 +617,82 @@ a:hover { text-decoration: underline; }
   </div>
 </section>
 
-<!-- Contact -->
+<!-- Contact: dark blue bg, form centered top, info cards below -->
 <section class="section contact-section" id="samband">
   <p class="section-label">Hafðu samband</p>
   <h2 class="section-title">Við erum til þjónustu</h2>
   <p class="section-sub">Sendu okkur línu eða hringdu beint</p>
-  <div class="contact-grid">
-    <div class="contact-info">
 
-      <div class="contact-item">
-        <div class="contact-item-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  <div class="contact-form-wrap">
+    <div class="contact-form-title">Sendu okkur skilaboð</div>
+    <div class="contact-form-sub">Við svörum innan sólarhrings</div>
+    <form class="form" onsubmit="event.preventDefault(); this.innerHTML='<p style=&quot;color:#2563eb;font-weight:600;padding:12px 0&quot;>Takk! Við munum hafa samband fljótlega.</p>'">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nafn *</label>
+          <input type="text" placeholder="Fullt nafn" required>
         </div>
-        <div>
-          <h4>Heimilisfang</h4>
-          <p>Smiðjuvegur 22, græn gata<br>200 Kópavogur</p>
+        <div class="form-group">
+          <label>Símanúmer *</label>
+          <input type="tel" placeholder="xxx xxxx" required>
         </div>
       </div>
-
-      <div class="contact-item">
-        <div class="contact-item-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.62 5C1.62 3.99 2.37 3.11 3.34 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.39 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18l.42 1.42-.08-2.5z"/></svg>
+      <div class="form-group">
+        <label>Netfang</label>
+        <input type="email" placeholder="netfang@example.is">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Bílnúmer *</label>
+          <input type="text" placeholder="ABC12" required>
         </div>
-        <div>
-          <h4>Símanúmer</h4>
-          <p><a href="tel:5677360">567 7360</a></p>
+        <div class="form-group">
+          <label>Tegund bíls</label>
+          <input type="text" placeholder="t.d. Toyota Yaris 2019">
         </div>
       </div>
-
-      <div class="contact-item">
-        <div class="contact-item-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div>
-          <h4>Netfang</h4>
-          <p><a href="mailto:bfo@bfo.is">bfo@bfo.is</a></p>
-        </div>
+      <div class="form-group">
+        <label>Skilaboð *</label>
+        <textarea placeholder="Hvernig getum við aðstoðað þig?" required></textarea>
       </div>
+      <button type="submit" class="form-submit">Senda fyrirspurn →</button>
+    </form>
+  </div>
 
-      <div class="contact-item">
-        <div class="contact-item-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-        </div>
-        <div>
-          <h4>Opnunartímar</h4>
-          <p>Mánudaga–fimmtudaga: 08:00–17:00<br>Föstudaga: 08:00–13:00</p>
-        </div>
+  <div class="contact-info-cards">
+    <div class="contact-card">
+      <div class="contact-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       </div>
-
+      <h4>Heimilisfang</h4>
+      <p>Smiðjuvegur 22, græn gata<br>200 Kópavogur</p>
     </div>
-
-    <div class="contact-form-wrap">
-      <h3>Sendu okkur skilaboð</h3>
-      <p>Við svörum innan sólarhrings</p>
-      <form class="form" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:#8B2020;font-weight:600;padding:12px 0\'>Takk! Við munum hafa samband fljótlega.</p>'">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nafn *</label>
-            <input type="text" placeholder="Fullt nafn" required>
-          </div>
-          <div class="form-group">
-            <label>Símanúmer *</label>
-            <input type="tel" placeholder="xxx xxxx" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Netfang</label>
-          <input type="email" placeholder="netfang@example.is">
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Bílnúmer *</label>
-            <input type="text" placeholder="ABC12" required>
-          </div>
-          <div class="form-group">
-            <label>Bílategund</label>
-            <input type="text" placeholder="t.d. Toyota Yaris 2019">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Skilaboð *</label>
-          <textarea placeholder="Hvernig getum við aðstoðað þig?" required></textarea>
-        </div>
-        <button type="submit" class="form-submit">Senda fyrirspurn →</button>
-      </form>
+    <div class="contact-card">
+      <div class="contact-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.62 5C1.62 3.99 2.37 3.11 3.34 3H6.5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.39 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 18l.42 1.42-.08-2.5z"/></svg>
+      </div>
+      <h4>Símanúmer</h4>
+      <p><a href="tel:5677360">567 7360</a></p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <h4>Netfang</h4>
+      <p><a href="mailto:bfo@bfo.is">bfo@bfo.is</a></p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+      </div>
+      <h4>Opnunartímar</h4>
+      <p>Mán–Fim: 08:00–17:00<br>Fös: 08:00–13:00</p>
     </div>
   </div>
 </section>
 
 <!-- Map -->
-<div class="map-section" id="stadsetning">
+<div id="stadsetning">
   <div class="map-container">
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1743.5!2d-21.88!3d64.11!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48d674c8f0c5f3e1%3A0x8f0c5f3e1!2sSmi%C3%B0juvegur+22%2C+200+K%C3%B3pavogur!5e0!3m2!1sis!2sis!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
@@ -674,10 +702,10 @@ a:hover { text-decoration: underline; }
 <footer class="footer">
   <div class="footer-top">BFÓ — Bifreiðaverkstæði Friðriks Ólafssonar ehf</div>
   <div class="footer-info">
-    Smiðjuvegur 22, græn gata, 200 Kópavogur &nbsp;·&nbsp; <a href="tel:5677360" style="color:#888">567 7360</a> &nbsp;·&nbsp; <a href="mailto:bfo@bfo.is" style="color:#888">bfo@bfo.is</a><br>
+    Smiðjuvegur 22, græn gata, 200 Kópavogur &nbsp;·&nbsp; <a href="tel:5677360">567 7360</a> &nbsp;·&nbsp; <a href="mailto:bfo@bfo.is">bfo@bfo.is</a><br>
     © 2026 — Öll réttindi áskilin
   </div>
-  <div class="footer-credit">Vefur hannaður af <a href="https://urru.ai" target="_blank">Urru.ai</a></div>
+  <div class="footer-credit">Hannað af <a href="https://urru.ai" target="_blank">Urru.ai</a></div>
 </footer>
 
 </body>
